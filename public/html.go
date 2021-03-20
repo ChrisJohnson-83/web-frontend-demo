@@ -9,11 +9,14 @@ import (
 //go:embed *
 var files embed.FS
 
-var (
-	dashboard   = parse("dashboard.html")
-	profileShow = parse("profile/show.html")
-	profileEdit = parse("profile/edit.html")
-)
+type IndexParams struct {
+	Title   string
+	Message string
+}
+
+func Index(w io.Writer, p IndexParams) error {
+	return parse("index.html").Execute(w, p)
+}
 
 type DashboardParams struct {
 	Title   string
@@ -21,7 +24,7 @@ type DashboardParams struct {
 }
 
 func Dashboard(w io.Writer, p DashboardParams) error {
-	return dashboard.Execute(w, p)
+	return parse("dashboard.html").Execute(w, p)
 }
 
 type ProfileShowParams struct {
@@ -30,7 +33,7 @@ type ProfileShowParams struct {
 }
 
 func ProfileShow(w io.Writer, p ProfileShowParams) error {
-	return profileShow.Execute(w, p)
+	return parse("profile/show.html").Execute(w, p)
 }
 
 type ProfileEditParams struct {
@@ -39,7 +42,7 @@ type ProfileEditParams struct {
 }
 
 func ProfileEdit(w io.Writer, p ProfileEditParams) error {
-	return profileEdit.Execute(w, p)
+	return parse("profile/edit.html").Execute(w, p)
 }
 
 func parse(file string) *template.Template {
