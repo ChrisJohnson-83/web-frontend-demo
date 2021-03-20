@@ -81,7 +81,7 @@ func (s *server) handleProfileShow() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		p := public.ProfileShowParams{
 			Title:   "Profile Show",
-			Message: "Hello from profile show",
+			Message: "Hello Chris from your profile",
 		}
 		public.ProfileShow(w, p)
 	}
