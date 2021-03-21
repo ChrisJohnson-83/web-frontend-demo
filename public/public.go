@@ -22,7 +22,13 @@ type DashboardParams struct {
 }
 
 func Dashboard(w io.Writer, p DashboardParams) error {
-	return parse("layout.html", "dashboard.html").Execute(w, p)
+	// f := "dashboard.html", "profile/show.html"
+	var baseTemplates = []string{
+		"public/dashboard.html",
+		// "public/profile/show.html",
+	}
+	return parse("layout.html", baseTemplates...).Execute(w, p)
+	// return parse("layout.html", "public/dashboard.html").Execute(w, p)
 }
 
 type ProfileShowParams struct {
@@ -32,7 +38,11 @@ type ProfileShowParams struct {
 }
 
 func ProfileShow(w io.Writer, p ProfileShowParams) error {
-	return parse("layout2.html", "profile/show.html").Execute(w, p)
+	var baseTemplates = []string{
+		"public/profile/show.html",
+		"public/profile/account.html",
+	}
+	return parse("layout2.html", baseTemplates...).Execute(w, p)
 }
 
 type ProfileEditParams struct {
@@ -42,7 +52,11 @@ type ProfileEditParams struct {
 }
 
 func ProfileEdit(w io.Writer, p ProfileEditParams) error {
-	return parse("layout.html", "profile/edit.html").Execute(w, p)
+	var baseTemplates = []string{
+		"public/profile/edit.html",
+		"public/profile/account.html",
+	}
+	return parse("layout.html", baseTemplates...).Execute(w, p)
 }
 
 // func parse(layout string, file string) *template.Template {
@@ -63,8 +77,8 @@ func ProfileEdit(w io.Writer, p ProfileEditParams) error {
 // 	)
 // }
 
-func parse(layout string, file string) *template.Template {
+func parse(layout string, file ...string) *template.Template {
 	return template.Must(
-		template.Must(template.Must(template.New(layout).ParseGlob("public/layout/*.html")).ParseGlob("public/partial/*.html")).ParseFS(files, file),
+		template.Must(template.Must(template.New(layout).ParseGlob("public/layout/*.html")).ParseGlob("public/partial/*.html")).ParseFiles(file...),
 	)
 }

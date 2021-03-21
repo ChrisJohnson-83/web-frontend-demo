@@ -8,13 +8,13 @@
 </head>
 <body>
     <div class="bg-blue-500 text-left">
-        {{block "menu" .}}{{end}}
+        {{ template "menu" . }}
     </div>
     <div class="bg-red-500 text-center">
-    {{block "content" .}}{{end}}
+        {{ template "content" . }}
     </div>
-        <div class="bg-green-500 text-left">
-        {{block "footer" .}}{{end}}
+    <div class="bg-green-500 text-left">
+        {{ template "footer" . }}
     </div>
 </body>
 </html>
