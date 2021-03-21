@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width,initial-scale=1'>
+    <title>{{.Title}} | Layout 2</title>
+	<link rel='stylesheet' href='/public/build/base.css'>
+</head>
+<body>
+    <div class="bg-green-500 text-left">
+        {{block "menu" .}}{{end}}
+    </div>
+    <div class="bg-gray-500 text-center">
+    {{block "content" .}}{{end}}
+    </div>
+</body>
+</html>

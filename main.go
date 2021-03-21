@@ -32,7 +32,8 @@ func run(args []string) error {
 	if err := flags.Parse(args[1:]); err != nil {
 		return err
 	}
-	addr := fmt.Sprintf("0.0.0.0:%s", *port)
+	// addr := fmt.Sprintf("0.0.0.0:%s", *port)
+	addr := fmt.Sprintf("localhost:%s", *port)
 	srv, err := newServer()
 	if err != nil {
 		return err
@@ -57,19 +58,18 @@ func (s *server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.mux.ServeHTTP(w, r)
 }
 
-func (s *server) handleIndex() http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		p := public.IndexParams{
-			Title:   "Home",
-			Message: "Hello from home",
-		}
-		public.Index(w, p)
-	}
-}
-
 func (s *server) handleDashboard() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		m := public.Menus{
+			public.Menu{
+				Item: "Jack",
+			},
+			public.Menu{
+				Item: "Jill",
+			},
+		}
 		p := public.DashboardParams{
+			Menus:   m,
 			Title:   "Dashboard",
 			Message: "Hello from dashboard",
 		}
@@ -79,7 +79,16 @@ func (s *server) handleDashboard() http.HandlerFunc {
 
 func (s *server) handleProfileShow() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		m := public.Menus{
+			public.Menu{
+				Item: "Jack",
+			},
+			public.Menu{
+				Item: "Jill",
+			},
+		}
 		p := public.ProfileShowParams{
+			Menus:   m,
 			Title:   "Profile Show",
 			Message: "Hello Chris from your profile",
 		}
@@ -89,7 +98,16 @@ func (s *server) handleProfileShow() http.HandlerFunc {
 
 func (s *server) handleProfileEdit() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		m := public.Menus{
+			public.Menu{
+				Item: "Jack",
+			},
+			public.Menu{
+				Item: "Jill",
+			},
+		}
 		p := public.ProfileEditParams{
+			Menus:   m,
 			Title:   "Profile Edit",
 			Message: "Hello from profile edit",
 		}

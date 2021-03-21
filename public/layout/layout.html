@@ -3,12 +3,18 @@
 <head>
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
-    <title>{{.Title}}</title>
+    <title>{{.Title}} | Layout 1</title>
 	<link rel='stylesheet' href='/public/build/base.css'>
 </head>
 <body>
+    <div class="bg-blue-500 text-left">
+        {{block "menu" .}}{{end}}
+    </div>
     <div class="bg-red-500 text-center">
     {{block "content" .}}{{end}}
+    </div>
+        <div class="bg-green-500 text-left">
+        {{block "footer" .}}{{end}}
     </div>
 </body>
 </html>
